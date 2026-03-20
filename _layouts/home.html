@@ -4,6 +4,11 @@ layout: archive
 
 {{ content }}
 
+<video controls autoplay muted loop playsinline width="100%">
+  <source src="{{ '/assets/videos/intro.mp4' | relative_url }}" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
 <h3 class="archive__subtitle">{{ site.data.ui-text[site.locale].recent_posts | default: "Recent Posts" }}</h3>
 
 {% if paginator %}
