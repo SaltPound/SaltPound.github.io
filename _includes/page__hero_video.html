@@ -1,2 +1,37 @@
 {% assign video = page.header.video %}
 {% include video id=video.id provider=video.provider danmaku=video.danmaku %}
+{% if page.header.video_file %}
+<div class="page__hero--overlay">
+  <div class="page__hero-video">
+    <video autoplay muted loop playsinline>
+      <source src="{{ page.header.video_file | relative_url }}" type="video/mp4">
+    </video>
+  </div>
+
+  <div class="wrapper">
+    {% if page.title %}
+    <h1 id="page-title" class="page__title" itemprop="headline">
+      {{ page.title | markdownify | remove: "<p>" | remove: "</p>" }}
+    </h1>
+    {% endif %}
+
+    {% if page.excerpt %}
+    <p class="page__lead">
+      {{ page.excerpt | markdownify | remove: "<p>" | remove: "</p>" }}
+    </p>
+    {% endif %}
+
+    {% if page.header.actions %}
+    <p>
+      {% for action in page.header.actions %}
+      <a href="{{ action.url | relative_url }}" class="btn btn--light-outline btn--large">
+        {{ action.label }}
+      </a>
+      {% endfor %}
+    </p>
+    {% endif %}
+  </div>
+</div>
+{% else %}
+{% include page__hero_overlay.html %}
+{% endif %}

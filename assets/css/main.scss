@@ -7,3 +7,41 @@ search: false
 
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
 @import "minimal-mistakes"; // main partials
+
+.page__hero--overlay {
+  position: relative;
+  min-height: 70vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.page__hero-video {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.page__hero-video video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.page__hero--overlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 1;
+}
+
+.page__hero--overlay .wrapper {
+  position: relative;
+  z-index: 2;
+}
+
+.page__title,
+.page__lead {
+  color: white;
+}
