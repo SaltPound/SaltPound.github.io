@@ -1,4 +1,3 @@
-
 {% if page.header.video_file %}
 <div class="page__hero--overlay">
   <div class="page__hero-video">
@@ -31,6 +30,12 @@
     {% endif %}
   </div>
 </div>
-{% else %}
-{% include page__hero_overlay.html %}
+{% elsif page.header.overlay_color or page.header.overlay_image or page.header.image %}
+<div class="page__hero{% if page.header.overlay_filter %}--overlay{% endif %}"
+     {% if page.header.overlay_color %} style="background-color: {{ page.header.overlay_color }};"{% endif %}
+     {% if page.header.overlay_image %} style="background-image: url('{{ page.header.overlay_image | relative_url }}');"{% endif %}>
+  {% if page.header.image %}
+  <img src="{{ page.header.image | relative_url }}" alt="" class="page__hero-image">
+  {% endif %}
+</div>
 {% endif %}
