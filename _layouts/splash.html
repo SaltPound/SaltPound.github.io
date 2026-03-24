@@ -1,11 +1,17 @@
 ---
 layout: default
 ---
-
+{% if page.header.video_file %}
+<div class="page__hero--overlay">
+  <video autoplay muted loop playsinline style="position:absolute; width:100%; height:100%; object-fit:cover;">
+    <source src="{{ page.header.video_file | relative_url }}" type="video/mp4">
+  </video>
+</div>
+{% endif %}
 
 {% if page.header.overlay_color or page.header.overlay_image or page.header.image  %}
 {% include page__hero.html %}
-{% elsif (page.header.video.id and page.header.video.provider) or page.header.video_file %}
+{% elsif page.header.video.id and page.header.video.provider %}
 {% include page__hero_video.html %}
 {% endif %}
 
