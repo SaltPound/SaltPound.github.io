@@ -1,0 +1,273 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<div class="west-scaling-widget" style="margin: 2rem 0;">
+
+<style>
+.wsw { font-family: inherit; }
+.wsw .slider-row { display: flex; align-items: center; gap: 12px; margin: 1rem 0; }
+.wsw .slider-label { font-size: 13px; color: #73726c; min-width: 130px; }
+.wsw .slider-val { font-size: 15px; font-weight: 500; min-width: 70px; text-align: right; }
+.wsw .metric-row { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; margin: 1rem 0; }
+.wsw .metric { background: #f5f4f0; border-radius: 8px; padding: .75rem 1rem; }
+.wsw .metric-label { font-size: 11px; color: #73726c; margin: 0 0 4px; }
+.wsw .metric-value { font-size: 22px; font-weight: 500; }
+.wsw .metric-delta { font-size: 11px; margin-top: 2px; color: #73726c; }
+.wsw .formula-block { background: #f5f4f0; border-left: 3px solid #1D9E75; border-radius: 6px; padding: 1rem 1.25rem; margin: 1.5rem 0; font-family: 'Courier New', monospace; font-size: 13px; line-height: 2; }
+.wsw .chart-section { margin: 1.5rem 0; }
+.wsw .chart-title { font-size: 13px; color: #444; margin: 0 0 6px; font-weight: 500; }
+.wsw .chart-wrap { position: relative; width: 100%; }
+.wsw .legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: 11px; color: #73726c; margin: 6px 0 0; }
+.wsw .leg-item { display: flex; align-items: center; gap: 5px; }
+.wsw .leg-sq { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+.wsw .note { font-size: 12px; color: #73726c; border-left: 2px solid #d3d1c7; padding-left: 10px; margin: .75rem 0; line-height: 1.65; }
+.wsw .section-divider { border: none; border-top: 0.5px solid #d3d1c7; margin: 1.5rem 0; }
+@media (max-width: 600px) {
+  .wsw .metric-row { grid-template-columns: 1fr 1fr; }
+  .wsw .metric-row .metric:last-child { grid-column: 1 / -1; }
+}
+@media (prefers-color-scheme: dark) {
+  .wsw .metric, .wsw .formula-block { background: #2c2c2a; }
+  .wsw .metric-label, .wsw .slider-label, .wsw .legend, .wsw .note, .wsw .chart-title { color: #b0aea6; }
+}
+</style>
+
+<div class="wsw">
+
+  <div class="slider-row">
+    <span class="slider-label">City population</span>
+    <input type="range" id="wsw-pop" min="1" max="40" value="10" step="1" style="flex:1; cursor:pointer;">
+    <span class="slider-val" id="wsw-pop-val">1.0M</span>
+  </div>
+
+  <div class="metric-row">
+    <div class="metric">
+      <div class="metric-label">Infrastructure &nbsp;<code style="font-size:10px">β = 0.85</code></div>
+      <div class="metric-value" id="wsw-infra" style="color:#3B8BD4">—</div>
+      <div class="metric-delta" id="wsw-infra-d">sublinear</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">GDP / wages &nbsp;<code style="font-size:10px">β = 1.15</code></div>
+      <div class="metric-value" id="wsw-gdp" style="color:#1D9E75">—</div>
+      <div class="metric-delta" id="wsw-gdp-d">superlinear</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">Walking speed &nbsp;<code style="font-size:10px">β = 1.09</code></div>
+      <div class="metric-value" id="wsw-walk" style="color:#BA7517">—</div>
+      <div class="metric-delta" id="wsw-walk-d">superlinear</div>
+    </div>
+  </div>
+
+  <div class="formula-block">
+    <div>Y = Y₀ · N<sup>β</sup></div>
+    <div>Infrastructure: &nbsp;β = <strong style="color:#3B8BD4">0.85</strong> &nbsp;→&nbsp; 2<sup>0.85</sup> ≈ <strong>×1.80</strong> when N doubles</div>
+    <div>GDP / innovation: β = <strong style="color:#1D9E75">1.15</strong> &nbsp;→&nbsp; 2<sup>1.15</sup> ≈ <strong>×2.22</strong> when N doubles</div>
+  </div>
+
+  <hr class="section-divider">
+
+  <div class="chart-section">
+    <div class="chart-title">Growth curves as population increases</div>
+    <div class="chart-wrap" style="height:280px;"><canvas id="wsw-chart1"></canvas></div>
+    <div class="legend">
+      <span class="leg-item"><span class="leg-sq" style="background:#3B8BD4"></span>Infrastructure (β=0.85)</span>
+      <span class="leg-item"><span class="leg-sq" style="background:#1D9E75"></span>GDP / wages (β=1.15)</span>
+      <span class="leg-item"><span class="leg-sq" style="background:#D85A30; opacity:.5"></span>Linear growth (β=1.0)</span>
+    </div>
+  </div>
+
+  <div class="chart-section">
+    <div class="chart-title">Log scale — the power law becomes a straight line</div>
+    <div class="chart-wrap" style="height:260px;"><canvas id="wsw-chart2"></canvas></div>
+    <div class="legend">
+      <span class="leg-item"><span class="leg-sq" style="background:#3B8BD4"></span>Infrastructure</span>
+      <span class="leg-item"><span class="leg-sq" style="background:#1D9E75"></span>GDP</span>
+      <span class="leg-item" style="display:flex;align-items:center;gap:5px;">
+        <span style="width:14px;height:0;border-top:2px dashed #888;display:inline-block;"></span>
+        Real cities
+      </span>
+    </div>
+    <div class="note">
+      On a log-log plot, log(Y) = log(Y₀) + β · log(N) — a straight line.
+      The slope is the exponent β. Data from hundreds of cities around the world
+      fall onto these lines with an accuracy unusual for the social sciences.
+    </div>
+  </div>
+
+  <div class="chart-section">
+    <div class="chart-title">Brasília: designed city vs. organic growth</div>
+    <div class="chart-wrap" style="height:260px;"><canvas id="wsw-chart3"></canvas></div>
+    <div class="legend">
+      <span class="leg-item"><span class="leg-sq" style="background:#1D9E75"></span>Organic city (β=1.15)</span>
+      <span class="leg-item"><span class="leg-sq" style="background:#D85A30"></span>Brasília: design capacity (const)</span>
+      <span class="leg-item"><span class="leg-sq" style="background:#888780"></span>Brasília: actual social index</span>
+    </div>
+    <div class="note">
+      Brasília was designed for 500,000 residents. The population grew — but the social
+      infrastructure didn't scale with it. The organic suburbs (satellite cities) grew
+      spontaneously and turned out to be far more livable.
+    </div>
+  </div>
+
+</div><!-- .wsw -->
+
+<script>
+(function() {
+  var BLUE  = '#3B8BD4';
+  var GREEN = '#1D9E75';
+  var RED   = '#D85A30';
+  var GRAY  = '#888780';
+  var AMBER = '#BA7517';
+
+  var isDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  var gridC  = isDark ? 'rgba(255,255,255,0.07)' : 'rgba(0,0,0,0.06)';
+  var tickC  = isDark ? '#b0aea6' : '#73726c';
+
+  function pw(N, b) { return Math.pow(N, b); }
+
+  var pops   = [0.1, 0.5, 1, 2, 5, 10, 20, 50];
+  var pLabels = pops.map(function(n){ return n < 1 ? Math.round(n*1000)+'k' : n+'M'; });
+  var infra  = pops.map(function(n){ return pw(n, 0.85); });
+  var gdp    = pops.map(function(n){ return pw(n, 1.15); });
+  var lin    = pops.map(function(n){ return pw(n, 1.0);  });
+
+  var baseOpts = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: {
+      x: { grid: { color: gridC }, ticks: { color: tickC, font: { size: 11 } } },
+      y: { grid: { color: gridC }, ticks: { color: tickC, font: { size: 11 } } }
+    }
+  };
+
+  function deepMerge(a, b) {
+    var out = Object.assign({}, a);
+    Object.keys(b).forEach(function(k){
+      out[k] = (b[k] && typeof b[k] === 'object' && !Array.isArray(b[k]))
+               ? deepMerge(a[k] || {}, b[k]) : b[k];
+    });
+    return out;
+  }
+
+  /* Chart 1 */
+  new Chart(document.getElementById('wsw-chart1'), {
+    type: 'line',
+    data: {
+      labels: pLabels,
+      datasets: [
+        { label: 'Infrastructure', data: infra, borderColor: BLUE,  backgroundColor: BLUE+'22',  borderWidth: 2, fill: true,  tension: 0.4, pointRadius: 3 },
+        { label: 'GDP',            data: gdp,   borderColor: GREEN, backgroundColor: GREEN+'22', borderWidth: 2, fill: true,  tension: 0.4, pointRadius: 3 },
+        { label: 'Linear',         data: lin,   borderColor: RED,   borderDash: [5,4],            borderWidth: 1.5, fill: false, tension: 0.4, pointRadius: 0 }
+      ]
+    },
+    options: deepMerge(baseOpts, {
+      scales: {
+        x: { title: { display: true, text: 'Population', color: tickC, font: { size: 11 } } },
+        y: { title: { display: true, text: 'Relative magnitude', color: tickC, font: { size: 11 } } }
+      }
+    })
+  });
+
+  /* Chart 2: log-log */
+  var logPops  = pops.map(function(n){ return +Math.log10(n).toFixed(2); });
+  var logInfra = infra.map(function(v){ return +Math.log10(v).toFixed(3); });
+  var logGdp   = gdp.map(function(v){   return +Math.log10(v).toFixed(3); });
+
+  var cities = [
+    { name: 'Tokyo',     logN: +Math.log10(37).toFixed(2),   logY: +Math.log10(pw(37,  1.15)*0.98).toFixed(3) },
+    { name: 'Mexico City', logN: +Math.log10(21).toFixed(2), logY: +Math.log10(pw(21,  1.15)*1.02).toFixed(3) },
+    { name: 'Nairobi',   logN: +Math.log10(4.5).toFixed(2),  logY: +Math.log10(pw(4.5, 1.15)*0.97).toFixed(3) },
+    { name: 'Bangalore', logN: +Math.log10(12).toFixed(2),   logY: +Math.log10(pw(12,  1.15)*1.05).toFixed(3) }
+  ];
+
+  new Chart(document.getElementById('wsw-chart2'), {
+    type: 'line',
+    data: {
+      labels: logPops,
+      datasets: [
+        { label: 'Infrastructure', data: logInfra, borderColor: BLUE,  borderWidth: 2, fill: false, tension: 0, pointRadius: 0 },
+        { label: 'GDP',            data: logGdp,   borderColor: GREEN, borderWidth: 2, fill: false, tension: 0, pointRadius: 0 },
+        {
+          label: 'Cities', type: 'scatter',
+          data: cities.map(function(c){ return { x: c.logN, y: c.logY }; }),
+          backgroundColor: GREEN + '99', borderColor: GREEN, pointRadius: 5, showLine: false
+        }
+      ]
+    },
+    options: deepMerge(baseOpts, {
+      plugins: {
+        tooltip: {
+          callbacks: {
+            label: function(ctx) {
+              if (ctx.datasetIndex === 2) return ' ' + cities[ctx.dataIndex].name;
+              return ' ' + ctx.dataset.label + ': ' + ctx.parsed.y.toFixed(2);
+            }
+          }
+        }
+      },
+      scales: {
+        x: { title: { display: true, text: 'log(Population, millions)', color: tickC, font: { size: 11 } } },
+        y: { title: { display: true, text: 'log(Indicator)',            color: tickC, font: { size: 11 } } }
+      }
+    })
+  });
+
+  /* Chart 3: Brasilia */
+  var years   = [1960, 1970, 1980, 1990, 2000, 2010, 2020];
+  var orgN    = [0.5,  1.1,  2.2,  4.0,  7.0,  11.5, 17.0];
+  var orgSoc  = orgN.map(function(n){ return +pw(n / 0.5, 1.15).toFixed(3); });
+  var designed = years.map(function(){ return 1.0; });
+  var actual   = [1.00, 1.05, 1.11, 1.17, 1.24, 1.32, 1.41];
+
+  new Chart(document.getElementById('wsw-chart3'), {
+    type: 'line',
+    data: {
+      labels: years,
+      datasets: [
+        { label: 'Organic growth',  data: orgSoc,   borderColor: GREEN, borderWidth: 2, fill: false, tension: 0.4, pointRadius: 3 },
+        { label: 'Design capacity', data: designed, borderColor: RED,   borderDash: [5,4], borderWidth: 1.5, fill: false, tension: 0, pointRadius: 0 },
+        { label: 'Brasília actual', data: actual,   borderColor: GRAY,  borderWidth: 2, fill: false, tension: 0.3, pointRadius: 3 }
+      ]
+    },
+    options: deepMerge(baseOpts, {
+      scales: {
+        x: { title: { display: true, text: 'Year', color: tickC, font: { size: 11 } } },
+        y: { title: { display: true, text: 'Social index (normalized)', color: tickC, font: { size: 11 } } }
+      }
+    })
+  });
+
+  /* Slider */
+  var slider = document.getElementById('wsw-pop');
+  var popVal = document.getElementById('wsw-pop-val');
+
+  slider.addEventListener('input', function() {
+    var N = this.value / 10;
+    popVal.textContent = N.toFixed(1) + 'M';
+
+    var iV = pw(N, 0.85).toFixed(2);
+    var gV = pw(N, 1.15).toFixed(2);
+    var wV = pw(N, 1.09).toFixed(2);
+
+    document.getElementById('wsw-infra').textContent  = '×' + iV;
+    document.getElementById('wsw-gdp').textContent    = '×' + gV;
+    document.getElementById('wsw-walk').textContent   = '×' + wV;
+
+    var linV = N.toFixed(2);
+    document.getElementById('wsw-infra-d').textContent = iV < linV ? 'slower than population' : 'linear';
+    document.getElementById('wsw-gdp-d').textContent   = gV > linV ? '+' + ((gV - linV) * 100 / linV).toFixed(0) + '% vs linear' : '';
+    document.getElementById('wsw-walk-d').textContent  = wV > linV ? '+' + ((wV - linV) * 100 / linV).toFixed(0) + '% vs linear' : '';
+  });
+
+  slider.dispatchEvent(new Event('input'));
+
+  /* Load Chart.js if not present */
+  if (typeof Chart === 'undefined') {
+    var s = document.createElement('script');
+    s.src = 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js';
+    s.onload = function() { slider.dispatchEvent(new Event('input')); };
+    document.head.appendChild(s);
+  }
+})();
+</script>
+
+</div><!-- .west-scaling-widget -->
