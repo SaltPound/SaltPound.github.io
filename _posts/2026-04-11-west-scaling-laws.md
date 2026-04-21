@@ -20,7 +20,7 @@ toc_sticky: true
 classes: justified
 excerpt: "Scaling laws of living systems — and why some cities never die."
 header:
-  teaser: /assets/img/di-aop-banner.png
+  teaser: /assets/images/di-aop-banner.png
 ---
 
 
@@ -34,11 +34,11 @@ His book **_Scale_ (2017)** describes the universal power laws that govern livin
 
 ## The Power Law: The Formula
 
-West and his colleagues analyzed data from hundreds of cities around the world and found that virtually any indicator $$Y$$ of a city scales as a power function of its population $$N$$:
+West and his colleagues analyzed data from hundreds of cities around the world and found that virtually any indicator \\(Y\\) of a city scales as a power function of its population \\(N\\):
 
 $$Y = Y_0 \cdot N^{\beta}$$
 
-where $$Y_0$$ is a normalization constant and $$\beta$$ is the scaling exponent. And here things start to get interesting.
+where \\(Y_0\\) is a normalization constant and \\(\beta\\) is the scaling exponent. And here things start to get interesting.
 
 ### Two Classes of Indicators
 
@@ -46,13 +46,13 @@ where $$Y_0$$ is a normalization constant and $$\beta$$ is the scaling exponent.
 
 $$Y_{\text{infra}} = Y_0 \cdot N^{0.85}$$
 
-Roads, electrical grids, water mains, the number of gas stations — all of these grow *more slowly* than population. Doubling the number of residents grows infrastructure by only $$2^{0.85} \approx 1.80$$. This is **economy of scale**: a large city is more efficient than a small one — fewer roads per resident, fewer pipes, less overhead in governance.
+Roads, electrical grids, water mains, the number of gas stations — all of these grow *more slowly* than population. Doubling the number of residents grows infrastructure by only \\(2^{0.85} \approx 1.80\\). This is **economy of scale**: a large city is more efficient than a small one — fewer roads per resident, fewer pipes, less overhead in governance.
 
 **Social indicators — superlinear growth (β ≈ 1.15):**
 
 $$Y_{\text{social}} = Y_0 \cdot N^{1.15}$$
 
-Wages, patents, restaurants, crime, the walking speed of pedestrians — all of these grow *faster* than population. Doubling the residents grows GDP by $$2^{1.15} \approx 2.22$$.
+Wages, patents, restaurants, crime, the walking speed of pedestrians — all of these grow *faster* than population. Doubling the residents grows GDP by \\(2^{1.15} \approx 2.22\\).
 
 > In other words: moving from a city of 1 million to a city of 2 million, you will on average earn 15–20% more, walk faster, and produce more innovation — even without changing jobs.
 
@@ -64,7 +64,7 @@ Why are scientists so confident in these laws? On a linear plot a power law look
 
 $$\log Y = \log Y_0 + \beta \cdot \log N$$
 
-This is the equation of a straight line. Its slope is exactly the coefficient $$\beta$$. When West plotted the data of hundreds of cities — Tokyo, Nairobi, Mexico City, Bangalore, small German towns — on a log-log plot, they fell onto straight lines with stunning accuracy. Not just close to straight — statistically, these are among the cleanest regularities ever found in the social sciences.
+This is the equation of a straight line. Its slope is exactly the coefficient \\(\beta\\). When West plotted the data of hundreds of cities — Tokyo, Nairobi, Mexico City, Bangalore, small German towns — on a log-log plot, they fell onto straight lines with stunning accuracy. Not just close to straight — statistically, these are among the cleanest regularities ever found in the social sciences.
 
 ---
 
@@ -83,7 +83,7 @@ Create it (with a Chart.js snippet) or remove this line if you haven't built the
 ## Brasília: The City That Was Designed
 
 <figure>
-  <img src="{{ site.baseurl }}/assets/img/brasilia-plan.jpg" alt="Master plan of Brasília shaped like an airplane">
+  <img src="{{ site.baseurl }}/assets/images/brasilia-plan.jpg" alt="Master plan of Brasília shaped like an airplane">
   <figcaption>Master plan of Brasília, 1956. Lúcio Costa and Oscar Niemeyer. The "flying airplane" shape — the beauty of the architect, not the resident.</figcaption>
 </figure>
 
@@ -163,7 +163,7 @@ A few concrete regularities that West confirmed empirically:
 | Pedestrian walking speed      | 1.09 | ×2.13                  |
 | Number of restaurants         | 1.15 | ×2.22                  |
 
-It's striking that the exponent $$\beta \approx 1.15$$ recurs for utterly different social indicators — the good (wages, patents) and the bad (crime) alike. It's a universal coefficient of social acceleration.
+It's striking that the exponent \\(\beta \approx 1.15\\) recurs for utterly different social indicators — the good (wages, patents) and the bad (crime) alike. It's a universal coefficient of social acceleration.
 
 ---
 

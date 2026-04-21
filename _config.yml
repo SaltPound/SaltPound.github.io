@@ -220,6 +220,7 @@ kramdown:
   toc_levels: 1..6
   smart_quotes: lsquo,rsquo,ldquo,rdquo
   enable_coderay: false
+  math_engine: null # let MathJax render $$...$$ and \(...\) client-side instead of kramdown pre-processing
 
 
 # Sass/SCSS
