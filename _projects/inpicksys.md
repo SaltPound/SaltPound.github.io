@@ -1,6 +1,7 @@
 ---
 title: "InPickSys"
 excerpt: "Part of the SiliconTicket stack — InPickSys." # TODO: rewrite with real one-liner
+order: 2
 header:
   teaser: # TODO: /assets/images/projects/inpicksys.png
 tags: [silicon-ticket, inpicksys]

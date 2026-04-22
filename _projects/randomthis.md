@@ -1,6 +1,7 @@
 ---
 title: "RandomThis"
 excerpt: "Probabilities as a service — API-first. In development." # TODO: sharpen the tagline
+order: 3
 header:
   teaser: # TODO: /assets/images/projects/randomthis.png
 tags: [randomthis, probabilities, api, in-development]

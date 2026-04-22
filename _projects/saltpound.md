@@ -1,6 +1,7 @@
 ---
 title: "Saltpound"
 excerpt: "Personal brand / landing page of SiliconTicket." # TODO: rewrite with accurate one-liner
+order: 4
 header:
   teaser: # TODO: /assets/images/projects/saltpound.png
 tags: [silicon-ticket, saltpound, landing]
