@@ -61,7 +61,9 @@ comments:
     lazy                 : # true, false # Loading of the comments will be deferred until the user scrolls near the comments container.
   staticman:
     branch               : "master" # branch Staticman will commit to
-    endpoint             : "https://saltpound-staticman.onrender.com/v2/entry/saltpound/saltpound.github.io/master/comments"
+    # NB: minimal-mistakes template appends `{repository}/{branch}/comments` itself,
+    #     so endpoint must be the bare `/v2/entry/` prefix (with trailing slash).
+    endpoint             : "https://saltpound-staticman.onrender.com/v2/entry/"
 reCaptcha:
   siteKey                : # TODO: your reCAPTCHA v2 site key (https://www.google.com/recaptcha/admin)
   secret                 : # TODO: AES-encrypted reCAPTCHA secret — see staticman docs; leave blank to run without captcha (OK while traffic is low)
