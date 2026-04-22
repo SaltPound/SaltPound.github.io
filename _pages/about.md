@@ -1,8 +1,46 @@
 ---
 permalink: /about/
 title: "About"
+author_profile: true
+classes: justified
 ---
 
-Tempor velit sint sunt ipsum tempor enim ad qui ullamco. Est dolore anim ad velit duis dolore minim sunt aliquip amet commodo labore. Ut eu pariatur aute ea aute excepteur laborum. Esse ea esse excepteur minim mollit qui cillum excepteur ex dolore magna. Labore deserunt fugiat incididunt incididunt sint ea. Consequat dolore aute laboris quis proident quis non et est consectetur ex eiusmod sit culpa.
+## Hello.
 
-Cupidatat ea do et in excepteur in. Ad nostrud ut est esse eu duis ea sunt eiusmod. Aliquip tempor veniam sint elit fugiat. Velit incididunt laboris amet incididunt labore dolore irure velit excepteur commodo deserunt laborum. Consectetur eu fugiat veniam veniam Lorem labore magna eiusmod. Ea occaecat reprehenderit pariatur consectetur minim labore ut aliquip.
+I'm Mikhail — the person behind **SaltPound** and a small constellation of
+adjacent projects: [SiliconTicket](https://snticket.com),
+[InPickSys](https://inpicksys.github.io), and *RandomThis* (still allergic to
+the public internet — watch this space). Engineer by training, system-thinker
+by habit, occasional writer by accident.
+
+This blog is where I think out loud about things that don't fit in a commit
+message — systems misbehaving in interesting ways, probabilities that
+contradict intuition, physics leaking into software, math refusing to stay on
+paper.
+
+## Why "SaltPound"?
+
+There's a Russian saying: to really understand someone, you have to eat a pound
+of salt with them.[^1] It works for problems, too. You don't *get* anything
+important until you've chewed through a lot of it — slowly, and usually with a
+grimace.
+
+This blog is me chewing, in public.
+
+[^1]: Pre-refrigeration, salt-curing a winter's worth of food took about a
+pound of salt per person. A pound of shared salt ≈ a year of shared life. The
+idiom survived longer than the refrigeration problem.
+
+## Write letters. With love.
+
+I like letters more than I like forms, but either works:
+
+- **Email:** <a href="mailto:mikhail.strutinsky@gmail.com">mikhail.strutinsky@gmail.com</a>
+- **Also in Russian** (with more posts and less polish):
+  [inpicksys.github.io](https://inpicksys.github.io)
+- **Everything else** → [saltpound.com](https://saltpound.com)
+
+Comments under posts also work — there's a small bot that turns them into pull
+requests, which I merge if they don't look like ads.
+
+That's it. Everything else worth saying is probably in the [posts](/).
