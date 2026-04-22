@@ -1,9 +1,18 @@
 ---
 permalink: /about/
 title: "About"
-author_profile: true
-classes: justified
+layout: single
+author_profile: false
+classes:
+  - wide
+  - justified
 ---
+
+<p style="text-align:center; margin: 0 0 1.5em;">
+  <img src="{{ '/assets/images/new_profile.jpg' | relative_url }}"
+       alt="Mikhail Strutinsky"
+       style="width: 180px; height: 180px; border-radius: 50%; object-fit: cover;">
+</p>
 
 ## Hello.
 
@@ -35,12 +44,11 @@ idiom survived longer than the refrigeration problem.
 
 I like letters more than I like forms, but either works:
 
-- **Email:** <a href="mailto:mikhail.strutinsky@gmail.com">mikhail.strutinsky@gmail.com</a>
-- **Also in Russian** (with more posts and less polish):
-  [inpicksys.github.io](https://inpicksys.github.io)
-- **Everything else** → [saltpound.com](https://saltpound.com)
+- **Email** — <a href="mailto:mikhail.strutinsky@gmail.com">mikhail.strutinsky@gmail.com</a>
+- **Also in Russian** (more posts, less polish) — [inpicksys.github.io](https://inpicksys.github.io)
+- **Everything else** — [saltpound.com](https://saltpound.com)
 
-Comments under posts also work — there's a small bot that turns them into pull
+Comments under posts work too — there's a small bot that turns them into pull
 requests, which I merge if they don't look like ads.
 
 That's it. Everything else worth saying is probably in the [posts](/).

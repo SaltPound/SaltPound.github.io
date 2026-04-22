@@ -26,7 +26,7 @@ url                      : "https://saltpound.github.io"
 baseurl                  : ""
 repository               : "saltpound/saltpound.github.io"
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
-logo                     : /assets/images/saltpound-mark.png
+logo                     : /assets/images/saltpound-mark.svg
 masthead_title           : # overrides the website title displayed in the masthead, use " " for no title
 # breadcrumbs            : false # true, false (default)
 words_per_minute         : 200
@@ -97,7 +97,7 @@ facebook:
   username               :
   app_id                 :
   publisher              :
-og_image                 : /assets/images/saltpound-og.png # Open Graph/Twitter default site image (1200×630)
+og_image                 : # TODO: 1200×630 PNG exported from saltpound-mark.svg — OG/Twitter cards require raster
 # For specifying social profiles
 # - https://developers.google.com/structured-data/customize/social-profiles
 social:
