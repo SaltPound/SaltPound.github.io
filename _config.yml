@@ -61,7 +61,7 @@ comments:
     lazy                 : # true, false # Loading of the comments will be deferred until the user scrolls near the comments container.
   staticman:
     branch               : "master" # branch Staticman will commit to
-    endpoint             : "https://YOUR-STATICMAN-BOT.onrender.com/v2/entry/saltpound/saltpound.github.io/master/comments" # TODO: replace YOUR-STATICMAN-BOT host after deploying the bot
+    endpoint             : "https://saltpound-staticman.onrender.com/v2/entry/saltpound/saltpound.github.io/master/comments"
 reCaptcha:
   siteKey                : # TODO: your reCAPTCHA v2 site key (https://www.google.com/recaptcha/admin)
   secret                 : # TODO: AES-encrypted reCAPTCHA secret — see staticman docs; leave blank to run without captcha (OK while traffic is low)
@@ -107,7 +107,7 @@ social:
 analytics:
   provider               : "google-gtag" # false (default), "google", "google-universal", "google-gtag", "custom"
   google:
-    tracking_id          : "G-XXXXXXXXXX" # TODO: replace with your real GA4 Measurement ID from analytics.google.com
+    tracking_id          : "G-ZHNWWM087D"
     anonymize_ip         : true # true, false (default)
 
 keywords: system, physics, probability, math
