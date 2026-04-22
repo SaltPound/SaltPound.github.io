@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
@@ -27,8 +27,14 @@ jobs:
         env:
           JEKYLL_ENV: production
 
+      # Soft link check: reports broken links/anchors but never fails the job.
+      # Skip-link anchors (#main, #site-nav, #footer) are theme-level pseudo-anchors
+      # that the checker mis-flags — they're safe to ignore.
       - name: Check for broken internal links
         uses: untitaker/hyperlink@0.1.44
         with:
-          args: _site/ --check-anchors
+          args: >-
+            _site/
+            --check-anchors
+            --sources _site/
         continue-on-error: true

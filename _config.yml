@@ -195,6 +195,8 @@ exclude:
   - tmp
   - /docs # ignore Minimal Mistakes /docs
   - /test # ignore Minimal Mistakes /test
+  - _projects/example-project.md # placeholder kept until physical delete via `git rm`
+  - .travis.yml # deprecated CI config replaced by .github/workflows/jekyll-build.yml
 keep_files:
   - .git
   - .svn
@@ -331,6 +333,7 @@ defaults:
       comments: true
       share: true
       related: true
+      classes: justified
 
   # _projects
   - scope:

@@ -2,12 +2,13 @@
 
 <!-- insert favicons. use https://realfavicongenerator.net/ -->
 
-<!-- MathJax 3 — renders $$...$$ (display) and \(...\) (inline) LaTeX in posts -->
+<!-- MathJax 3 — renders inline \(...\) and display \[...\] / $$...$$ LaTeX
+     (kramdown with math_engine: null emits \(...\) / \[...\] from $...$ source) -->
 <script>
   window.MathJax = {
     tex: {
       inlineMath: [['\\(', '\\)']],
-      displayMath: [['$$', '$$']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
       processEscapes: true
     },
     options: {
@@ -16,5 +17,27 @@
   };
 </script>
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<!-- Justified body text on posts/pages that opt in via `classes: justified` -->
+<style>
+  .page__content.justified,
+  .justified p,
+  .justified li {
+    text-align: justify;
+    text-justify: inter-word;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+  }
+  /* Don't justify code blocks, blockquotes, headings, tables */
+  .justified pre,
+  .justified blockquote,
+  .justified h1, .justified h2, .justified h3,
+  .justified h4, .justified h5, .justified h6,
+  .justified table {
+    text-align: left;
+    hyphens: none;
+  }
+</style>
 
 <!-- end custom head snippets -->
